@@ -12,7 +12,7 @@ drawBasicHeader();
 function drawBasicHeader() {
     context.fillStyle = 'black'
     context.fillRect(centerX-475, centerY-225,800,300)
-    context.fillStyle = "red";
+    context.fillStyle = "white";
     context.font = "bold 55pt Arial";
     context.fillText("Tom Wouters",centerX-300,centerY-50);
 }
