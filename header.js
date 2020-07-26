@@ -9,22 +9,21 @@ let centerY = height / 2;
 
 let x = [];
 let y = [];
-let n = 50;
+let n = 100;
 
-
-
+document.onmousemove = onMouse;
+drawName();
 drawBasicHeader();
 drawForm(600, 500);
 setup();
 update();
-document.onmousedown = onMouse;
+
+
+
 
 function drawBasicHeader() {
     context.fillStyle = 'black'
-    context.fillRect(0,0,width,height)
-    context.fillStyle = "white";
-    context.font = "bold 88pt Arial";
-    context.fillText("Tom Wouters", centerX -400, centerY);
+    context.fillRect(0, 0, width, height)
 }
 
 function setup() {
@@ -45,20 +44,7 @@ function update() {
     requestAnimationFrame(update);
 }
 
-function onMouse() {
-    context.fillStyle = 'pink'
-    context.fillRect(0,0,width,height)
-    context.fillStyle = "black";
-    context.font = "bold 88pt Arial";
-    context.fillText("Tom Wouters", centerX -400, centerY);
 
-    for (let i = 5; i < n; i++) {
-        drawForm(x[i], y[i]);
-        x[i] += Utils.randomNumber(-2, 0);
-        y[i] += Utils.randomNumber(-0, 0);
-    }
-    requestAnimationFrame(update);
-}
 
 function drawForm(x, y, hue) {
     context.fillStyle = 'red';
@@ -69,4 +55,24 @@ function drawForm(x, y, hue) {
     context.fillStyle = "black";
     Utils.fillCircle(x - 8, y - 8, 5, 5);
     Utils.fillCircle(x + 8, y + 8, 5, 5);
+    drawName();
+}
+
+function drawName() {
+    context.fillStyle = "white";
+    context.font = "bold 88pt Arial";
+    context.fillText("Tom Wouters", centerX - 400, centerY);
+}
+
+function onMouse() {
+    context.fillStyle = 'grey'
+    context.fillRect(0, 0, width, height)
+
+
+    for (let i = 5; i < n; i++) {
+        drawForm(x[i], y[i]);
+        x[i] += Utils.randomNumber(-5, 0);
+        y[i] += Utils.randomNumber(-5, 0);
+    }
+    requestAnimationFrame(update);
 }
