@@ -9,20 +9,22 @@ let centerY = height / 2;
 
 let x = [];
 let y = [];
-let n = 100;
+let n = 50;
 
 document.onmousemove = onMouse;
 drawName();
 drawBasicHeader();
 drawForm(600, 500);
 setup();
-update();
+goWild();
+
+
 
 
 
 
 function drawBasicHeader() {
-    context.fillStyle = 'black'
+    context.fillStyle = 'grey'
     context.fillRect(0, 0, width, height)
 }
 
@@ -34,28 +36,31 @@ function setup() {
     }
 }
 
-function update() {
+function goWild() {
 
     for (let i = 0; i < n; i++) {
         drawForm(x[i], y[i]);
-        x[i] += Utils.randomNumber(-2, 2);
-        y[i] += Utils.randomNumber(-2, 2);
+        x[i] += Utils.randomNumber(-5,5);
+        y[i] += Utils.randomNumber(-5,5);
     }
-    requestAnimationFrame(update);
+    requestAnimationFrame(goWild);
 }
 
 
 
-function drawForm(x, y, hue) {
-    context.fillStyle = 'red';
+function drawForm(x, y) {
+    context.fillStyle = "black";
     context.beginPath();
     context.moveTo(x, y);
-    context.ellipse(x, y, 20, 20, 0, Math.PI, Math.PI * 4);
+    context.lineWidth = 50;
+    context.ellipse(x, y, 30, 30, 0, Math.PI, Math.PI *4);
+    context.stroke();
+    context.fillStyle = 'red';
+    Utils.fillCircle(x, y,20, 5);
     context.fill();
-    context.fillStyle = "black";
-    Utils.fillCircle(x - 8, y - 8, 5, 5);
-    Utils.fillCircle(x + 8, y + 8, 5, 5);
+    
     drawName();
+   
 }
 
 function drawName() {
@@ -64,15 +69,15 @@ function drawName() {
     context.fillText("Tom Wouters", centerX - 400, centerY);
 }
 
-function onMouse() {
-    context.fillStyle = 'grey'
-    context.fillRect(0, 0, width, height)
-
-
+function onMouse(e) {
+    
     for (let i = 5; i < n; i++) {
         drawForm(x[i], y[i]);
-        x[i] += Utils.randomNumber(-5, 0);
-        y[i] += Utils.randomNumber(-5, 0);
+        x[i] += Utils.randomNumber(-2, 2);
+        y[i] += Utils.randomNumber(-2, 2);
+        context.fillStyle = 'black'
+        context.fillRect(0, 0, width, height)
+       
     }
-    requestAnimationFrame(update);
+    requestAnimationFrame(goWild);
 }
